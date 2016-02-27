@@ -38,6 +38,14 @@ public class MainActivityFragment extends Fragment implements SwipeRefreshLayout
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        /*
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
+        */
 
         mMatchList = (RecyclerView) rootView.findViewById(R.id.kwickieList);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -45,6 +53,7 @@ public class MainActivityFragment extends Fragment implements SwipeRefreshLayout
         mMatchList.setLayoutManager(layoutManager);
         mMatchList.setHasFixedSize(true);
         mEmptyView = (TextView) rootView.findViewById(R.id.empty_view);
+
 
         //to minimise complexities in refresh layout and recycle view scroll getting overlapped
         mMatchList.addOnScrollListener(new RecyclerView.OnScrollListener() {
