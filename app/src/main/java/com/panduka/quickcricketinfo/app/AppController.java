@@ -3,6 +3,11 @@ package com.panduka.quickcricketinfo.app;
 import android.app.Application;
 import android.text.TextUtils;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -19,6 +24,7 @@ public class AppController extends Application {
     private static AppController mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private TransferUtility mTransferUtility;
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -30,6 +36,16 @@ public class AppController extends Application {
         mInstance = this;
         //Facebook integration related
         FacebookSdk.sdkInitialize(getApplicationContext());
+
+        //AWS tranfer utility object creation
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                getApplicationContext(),
+                AppConfig.AWS_IDENTITY_POOL_ID,
+                Regions.AP_NORTHEAST_1
+        );
+
+        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
+        setTransferUtility(new TransferUtility(s3, getApplicationContext()));
     }
 
     //handling volley related message queues
@@ -65,5 +81,13 @@ public class AppController extends Application {
                     new LruBitmapCache(getApplicationContext()));
         }
         return this.mImageLoader;
+    }
+
+    public TransferUtility getTransferUtility() {
+        return mTransferUtility;
+    }
+
+    private void setTransferUtility(TransferUtility mTransferUtility) {
+        this.mTransferUtility = mTransferUtility;
     }
 }

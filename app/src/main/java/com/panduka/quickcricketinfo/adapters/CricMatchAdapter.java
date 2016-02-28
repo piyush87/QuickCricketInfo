@@ -14,6 +14,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.LikeView;
 import com.facebook.share.widget.ShareButton;
 import com.panduka.quickcricketinfo.R;
+import com.panduka.quickcricketinfo.app.AppConfig;
 import com.panduka.quickcricketinfo.app.AppController;
 import com.panduka.quickcricketinfo.datastructure.CricketMatch;
 
@@ -53,16 +54,8 @@ public class CricMatchAdapter extends RecyclerView.Adapter<CricMatchAdapter.View
         holder.txtScore1Team2.setText(mDataSet.get(position).team2.score1);
         holder.txtDescription.setText(mDataSet.get(position).matchDescription);
 
-        //facebook integration related
-        /*
-        holder.btnFbLike.setObjectIdAndType(
-                "https://www.facebook.com/DonaldTrump/?fref=nf",
-                LikeView.ObjectType.PAGE);
-        holder.btnFbLike.setLikeViewStyle(LikeView.Style.STANDARD);
-        holder.btnFbLike.setAuxiliaryViewPosition(LikeView.AuxiliaryViewPosition.INLINE);
-        */
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://www.facebook.com/thescorelk/?fref=ts"))
+                .setContentUrl(Uri.parse(AppConfig.FACEBOOK_PAGE))
                 .setContentDescription(mDataSet.get(position).matchDescription)
                 .setContentTitle(mDataSet.get(position).team1.teamName + " VS " + mDataSet.get(position).team2.teamName)
                 .build();
