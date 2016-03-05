@@ -45,7 +45,7 @@ public class DataDownloader {
         void sendResponse(Map<String, String> response);
     }
 
-    public void getKwickies() {
+    public void getMatches() {
         final ResponseHandler networkResponseHandler = (ResponseHandler) this.mFrag;
         StringRequest strReq = new StringRequest(Request.Method.GET,
                 AppConfig.URL_CRIC_INFO, new Response.Listener<String>() {
@@ -87,11 +87,13 @@ public class DataDownloader {
 
                 if (error.getMessage() == null)
                     errorMap.put(DATA_RETRIEVE_ERROR, MSG_SERVER_RESPONSE_ERROR);
-                else
+                else {
                     errorMap.put(DATA_RETRIEVE_ERROR, error.getMessage());
+                    Log.e(TAG, error.getMessage());
+                }
 
                 networkResponseHandler.sendResponse(errorMap);
-                Log.e(TAG, error.getMessage());
+
             }
         });
 

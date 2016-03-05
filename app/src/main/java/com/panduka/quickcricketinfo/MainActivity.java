@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,12 +27,16 @@ import com.facebook.appevents.AppEventsLogger;
 import com.panduka.quickcricketinfo.app.AppConfig;
 import com.panduka.quickcricketinfo.app.AppController;
 import com.panduka.quickcricketinfo.dialogs.AboutUsDialog;
+import com.panduka.quickcricketinfo.utils.ContractTest;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
+    private SetAdapter mSetAdapter;
+    private MainActivityFragment mMainFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Pull down to refresh", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Pull down to refresh", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                mMainFrag = (MainActivityFragment)getSupportFragmentManager().findFragmentById(R.id.fragment);
+                mSetAdapter = mMainFrag;
+                mSetAdapter.setRefreshHandler();
             }
         });
 
         initialize();
     }
+
+    public interface SetAdapter{
+        void setRefreshHandler();
+    }
+
 
     private void initialize() {
         //AWS integration Test
@@ -73,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
             uploadToAWS("camera-p.jpg");
         }
 
+        ContractTest ctr = new ContractTest();
     }
+
 
     private void downloadFromAWS(String fileName) {
         File f = new File(Environment.getExternalStorageDirectory() + File.separator + fileName);
@@ -102,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

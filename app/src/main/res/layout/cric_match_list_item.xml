@@ -10,7 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <com.facebook.share.widget.ShareButton
             android:id="@+id/fbShare"
@@ -34,15 +37,16 @@
                 <TextView
                     android:id="@+id/txtNameTeam1"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_weight="2"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text=" VS "
                     android:textStyle="bold" />
@@ -65,23 +69,24 @@
                 <TextView
                     android:id="@+id/txtScoreTeam1"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_weight="2"
                     android:text="New Text"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtScoreTeam2"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:text="New Text"
                     android:textStyle="bold" />
@@ -94,22 +99,23 @@
                 <TextView
                     android:id="@+id/txtScore1Team1"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_weight="2"
                     android:text="New Text" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtScore1Team2"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:text="New Text" />
             </TableRow>
@@ -125,8 +131,8 @@
             android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="6dp"
             android:background="@color/colorLightGray"
+            android:padding="6dp"
             android:text="Description" />
 
 
