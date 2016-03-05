@@ -1,12 +1,16 @@
 package com.panduka.quickcricketinfo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.facebook.share.internal.ShareFeedContent;
 import com.facebook.share.model.ShareContent;
@@ -14,6 +18,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.LikeView;
 import com.facebook.share.widget.ShareButton;
 import com.panduka.quickcricketinfo.R;
+import com.panduka.quickcricketinfo.activities.MatchActivity;
 import com.panduka.quickcricketinfo.app.AppConfig;
 import com.panduka.quickcricketinfo.app.AppController;
 import com.panduka.quickcricketinfo.datastructure.CricketMatch;
@@ -61,6 +66,14 @@ public class CricMatchAdapter extends RecyclerView.Adapter<CricMatchAdapter.View
                 .build();
         holder.btnShare.setShareContent(content);
 
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                Intent i = new Intent(mCxt, MatchActivity.class);
+                mCxt.startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -68,7 +81,11 @@ public class CricMatchAdapter extends RecyclerView.Adapter<CricMatchAdapter.View
         return mDataSet.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public interface ItemClickListener {
+        void onClick(View view, int position, boolean isLongClick);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView txtNameTeam1;
         public TextView txtNameTeam2;
@@ -79,8 +96,13 @@ public class CricMatchAdapter extends RecyclerView.Adapter<CricMatchAdapter.View
         public TextView txtDescription;
         public ShareButton btnShare;
 
+        private ItemClickListener clickListener;
+
         public ViewHolder(View v) {
             super(v);
+
+            v.setOnClickListener(this);
+
             txtNameTeam1 = (TextView) v.findViewById(R.id.txtNameTeam1);
             txtNameTeam2 = (TextView) v.findViewById(R.id.txtNameTeam2);
             txtScoreTeam1 = (TextView) v.findViewById(R.id.txtScoreTeam1);
@@ -91,6 +113,21 @@ public class CricMatchAdapter extends RecyclerView.Adapter<CricMatchAdapter.View
             btnShare = (ShareButton)v.findViewById(R.id.fbShare);
 
 
+        }
+
+        public void setClickListener(ItemClickListener itemClickListener) {
+            this.clickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onClick(v, getPosition(), true);
+            return true;
         }
     }
 }

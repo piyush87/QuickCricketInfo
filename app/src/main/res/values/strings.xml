@@ -6,5 +6,12 @@
     <string name="msg_no_data">Data Not Avaialble</string>
     <string name="descr_about_us">Welcome to Quick Cricket LIVE. This is a very light weight app with an attempt to provide live cric scores from around the world in a very simple way. Nothing complex. \nPull down to refresh and get the latest score highlights at your finger tips. \n\nWe will improve the app in the mean time, so stay tuned for some excitement ! \n\nAuthor : <a href="https://au.linkedin.com/in/panduka-de-silva-84497aa">Panduka De Silva</a> \n\nVersion : V 1.0.1 27022016</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="title_activity_match">MatchActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="page_title_section1">Summery</string>
+    <string name="page_title_section2">Innings 1</string>
+    <string name="page_title_section3">Innings 2</string>
 
 </resources>

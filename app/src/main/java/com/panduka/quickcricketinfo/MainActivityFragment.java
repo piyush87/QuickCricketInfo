@@ -90,7 +90,6 @@ public class MainActivityFragment extends Fragment implements SwipeRefreshLayout
         //to show refreshing icon in the beginning: passing an empty adapter to the recycleview
         mMatchList.setAdapter(new CricMatchAdapter(new ArrayList<CricketMatch>()));
 
-
         //to minimise complexities in refresh layout and recycle view scroll getting overlapped
         /*
         mMatchList.addOnScrollListener(new RecyclerView.OnScrollListener() {
