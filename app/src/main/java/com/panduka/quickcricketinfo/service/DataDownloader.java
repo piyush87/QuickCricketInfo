@@ -24,6 +24,7 @@ public class DataDownloader {
 
     private static final String TAG = DataDownloader.class.getSimpleName();
     public static final String TAG_REQ_GET_CRICKET_MATCHES = "cric_request";
+    public static final String TAG_REQ_GET_CRICKET_MATCHES_DETAILS = "cric_request_details";
     public static final String DATA_RESOLVER_OK = "resolver_ok";
     public static final String DATA_RESOLVER_ERROR = "resolver_error";
     public static final String DATA_RETRIEVE_ERROR = "retrieve_error";
@@ -45,10 +46,10 @@ public class DataDownloader {
         void sendResponse(Map<String, String> response);
     }
 
-    public void getMatches() {
+    public void getMatchData(String URL) {
         final ResponseHandler networkResponseHandler = (ResponseHandler) this.mFrag;
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.URL_CRIC_INFO, new Response.Listener<String>() {
+                URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -56,7 +57,7 @@ public class DataDownloader {
                 String resolverError = null;
                 try {
                     DataResolver.getInstance().initialize(response);
-                    DataResolver.getInstance().getCricketMatchList();
+                    //DataResolver.getInstance().getCricketMatchList();
                     resFlag_ = true;
                 } catch (JSONException e) {
                     resolverError = MSG_JSON_RETRIEVE_ERROR;

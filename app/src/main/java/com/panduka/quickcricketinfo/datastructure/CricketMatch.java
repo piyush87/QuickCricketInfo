@@ -9,5 +9,6 @@ public class CricketMatch {
     public String matchDescription;
     public Team1 team1;
     public Team2 team2;
+    public MatchDetails matchDetails;
 
 }

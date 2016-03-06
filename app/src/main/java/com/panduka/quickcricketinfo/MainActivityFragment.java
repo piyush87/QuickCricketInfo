@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.panduka.quickcricketinfo.adapters.CricMatchAdapter;
+import com.panduka.quickcricketinfo.app.AppConfig;
 import com.panduka.quickcricketinfo.app.AppController;
 import com.panduka.quickcricketinfo.datastructure.CricketMatch;
 import com.panduka.quickcricketinfo.service.DataDownloader;
@@ -174,7 +175,7 @@ public class MainActivityFragment extends Fragment implements SwipeRefreshLayout
         if (Assistance.isNetworkAvailable(getActivity())) {
             setRefreshing(true);
             DataDownloader dataLoader = new DataDownloader(this);
-            dataLoader.getMatches();
+            dataLoader.getMatchData(AppConfig.URL_CRIC_INFO);
         } else {
             setRefreshing(false);
             setmEmptyView(MSG_NO_INTERNET_ERROR,View.VISIBLE);
